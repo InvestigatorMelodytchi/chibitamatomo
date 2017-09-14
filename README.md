@@ -1,2 +1,0 @@
-# chibitamatomo
-ちびたまとも♥
