@@ -58,17 +58,20 @@ var env = {
 function Transition(fNext) {
 	// Variables.
 	this.x = -(spr_transition.width / 2);
-	this.nextControl = new fNext;
-	this.doTick = true;
+	this.nextControl = fNext;
+	this.doTick = 0;
 	
 	// Moving.
 	this.Act = function() {
-		if (this.doTick) this.x += 32;
-		this.doTick = !(this.doTick);
-		if (this.x == -32) {
+		if (this.doTick > 0) this.doTick--;
+		else {
+			this.x += 32;
+			this.doTick = 1;
+		}
+		if (this.x == -256) {
 			objControl = this.nextControl;
 		}
-		else if (this.x >= (spr_transition.width / 2)) {
+		else if (this.x >= 320) {
 			objTransition = undefined;
 		}
 	}

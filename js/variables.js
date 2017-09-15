@@ -5,12 +5,12 @@ var objControl;
 // Game setup.
 var playerChar = [];
 var playerTamatomo = [];
-for (i = 0; i < 4; i++) {
-	playerChar[i] = -1;
-	playerTamatomo[i] = -1;
-}
+var playerPoints = [];
+resetPlayers();
 
 // Global variables.
+var menuLanguageEnable = false;
+var menuLanguage = 0;
 var menuBackScroll = 0;
 var menuBackTick = 1;
 var gameSpeed = 2;

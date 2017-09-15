@@ -5,14 +5,14 @@ function MenuDraw(fSpr) {
 	drawSpriteNormal(spr_menu_title, 0, 0, 94, 8);
 	
 	// Menu buttons.
-	if (fSpr != undefined) drawSpriteNormal(fSpr, 0, 0, 0, 120);
+	if (fSpr != undefined) drawSpriteNormal(fSpr, menuLanguage, 0, 0, 120);
 }
 
 // Test controller.
 function ControlTest() {
 	// Clicky.
 	this.Click = function() {
-		if (MousePointNormal(0, 120, 171, 146)) TransGo(ControlMainMenu);
+		if (MousePointNormal(0, 120, 171, 146)) TransGo(new ControlMainMenu());
 	}
 	
 	// Drawing.
@@ -23,14 +23,23 @@ function ControlTest() {
 
 // Main menu controller.
 function ControlMainMenu() {
+	// Reset.
+	resetPlayers();
+	
 	// Clicky.
 	this.Click = function() {
-		if (MousePointNormal(0, 120, 171, 146)) TransGo(ControlSetupMenu);
+		if (MousePointNormal(0, 120, 171, 146)) TransGo(new ControlSetupMenu());
+		else if (MousePointNormal(0, 154, 171, 180)) TransGo(new ControlViewMenu());
+		else if (MousePointNormal(282, 208, 318, 236) && menuLanguageEnable) menuLanguage = !(menuLanguage);
 	}
 	
 	// Drawing.
 	this.Draw = function() {
+		// Menu.
 		MenuDraw(spr_menu_button_main);
+		
+		// Language.
+		if (menuLanguageEnable) drawSpriteNormal(spr_menu_flag, menuLanguage, 0, 282, 208);
 	}
 }
 
@@ -48,7 +57,7 @@ function ControlSetupMenu() {
 				this.menuPlayer--;
 				playerChar[this.menuPlayer] = -1;
 			}
-			else TransGo(ControlMainMenu);
+			else TransGo(new ControlMainMenu());
 		}
 		
 		// Game speed.
@@ -70,9 +79,9 @@ function ControlSetupMenu() {
 		drawSpriteNormal(spr_menu_back, 0, 0, menuBackScroll, menuBackScroll);
 		
 		// Buttons.
-		drawSpriteNormal(spr_menu_button_setup, 0, 0, 0, 8);
-		if (this.menuPlayer > 1) drawSpriteNormal(spr_menu_button_setup, 0, 1, 0, 42);
-		drawSpriteNormal(spr_menu_speed, 0, gameSpeed, 215, 25);
+		drawSpriteNormal(spr_menu_button_setup, menuLanguage, 0, 0, 8);
+		if (this.menuPlayer > 1) drawSpriteNormal(spr_menu_button_setup, menuLanguage, 1, 0, 42);
+		drawSpriteNormal(spr_menu_speed, menuLanguage, gameSpeed, 215, 25);
 		
 		// Players.
 		for (i = 0; i < 4; i++) {
@@ -82,22 +91,40 @@ function ControlSetupMenu() {
 		}
 		
 		// Characters.
-		for (i = 0; i < 4; i++) drawSpriteNormal(spr_menu_char, checkForChar(i), i, 113 + (i * 48), 102);
-		for (i = 0; i < 4; i++) drawSpriteNormal(spr_menu_char, checkForChar(i + 4), i + 4, 113 + (i * 48), 143);
-		for (i = 0; i < 4; i++) drawSpriteNormal(spr_menu_char, checkForChar(i + 8), i + 8, 113 + (i * 48), 184);
-		
-		// Character name.
 		this.menuChar = -1;
-		if (MousePointNormal(113, 102, 304, 222)) {
-			for (j = 0; j < 3; j++) {
-				for (i = 0; i < 4; i++) {
-					if (MousePointNormal(113 + (i * 48), 102 + (j * 41), 160 + (i * 48), 140 + (j * 41))) {
-						this.menuChar = i + (j * 4);
-						break;
-					}
+		for (j = 0; j < 3; j++) {
+			for (i = 0; i < 4; i++) {
+				drawSpriteNormal(spr_menu_char, checkForChar(i + (j * 4)), i + (j * 4), 113 + (i * 48), 102 + (j * 41));
+				if (MousePointNormal(113 + (i * 48), 102 + (j * 41), 160 + (i * 48), 140 + (j * 41)) && !checkForChar(i + (j * 4)) && this.menuPlayer < 4) {
+					this.menuChar = i + (j * 4);
+					drawSpriteNormal(spr_menu_char_select, 0, 0, 113 + (i * 48), 102 + (j * 41));
 				}
 			}
 		}
-		if (this.menuChar > -1 && this.menuPlayer < 4 && !checkForChar(this.menuChar)) drawSpriteNormal(spr_menu_name, 0, this.menuChar, 154, 75);
+		
+		// Character name.
+		if (this.menuChar > -1 && this.menuPlayer < 4 && !checkForChar(this.menuChar)) drawSpriteNormal(spr_menu_name, menuLanguage, this.menuChar, 154, 75);
+	}
+}
+
+// View tamatomo menu controller.
+function ControlViewMenu() {
+	// Clicky.
+	this.Click = function() {
+		if (MousePointNormal(0, 120, 171, 146)) TransGo(new ControlMainMenu());
+	}
+	
+	// Drawing.
+	this.Draw = function() {
+		// Menu.
+		MenuDraw(spr_menu_button_setup);
+		
+		// Prompt.
+		drawSpriteNormal(spr_menu_tamatomo_prompt, 0, 0, 203, 114);
+		
+		// Podium.
+		drawSpriteNormal(spr_menu_tamatomo_podium, 0, 0, 134, 223);
+		
+		// Tamatomo.
 	}
 }
