@@ -9,7 +9,9 @@ function gameInterval() {
 	if (objTransition != undefined) objTransition.Act();
 	
 	// Holding mouse button.
-	if (mouseState == 2) mouseState = 1;
+	if (mouseState == 2) {
+		mouseState = 1;
+	}
 	
 	// Moving menu background.
 	if (menuBackTick > 0) menuBackTick--;

@@ -33,3 +33,11 @@ var spr_menu_speed = loadSpr("menu_speed", 2, 5);
 var spr_menu_flag = loadSpr("menu_flag", 2, 1);
 var spr_menu_tamatomo_prompt = loadSpr("menu_tamatomo_prompt", 1, 1);
 var spr_menu_tamatomo_podium = loadSpr("menu_tamatomo_podium", 2, 1);
+
+// Board sprites.
+var spr_board_tile = loadSpr("board_tile", 7, 1);
+
+// Player sprites.
+var spr_player = [
+	loadSpr("player_mero", 4, 1),
+];
