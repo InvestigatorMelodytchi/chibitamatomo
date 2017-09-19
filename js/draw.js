@@ -15,7 +15,7 @@ function drawInterval() {
 
 // Simpler drawing function.
 function drawSpriteFull(fSpr, fLeft, fTop, fWidth, fHeight, fX, fY) {
-	env.context.drawImage(fSpr, fLeft, fTop, fWidth, fHeight, fX, fY, fWidth, fHeight);
+	env.context.drawImage(fSpr, fLeft, fTop, fWidth, fHeight, Math.round(fX), Math.round(fY), fWidth, fHeight);
 }
 
 // Even simpler drawing function.

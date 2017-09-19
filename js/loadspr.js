@@ -33,11 +33,33 @@ var spr_menu_speed = loadSpr("menu_speed", 2, 5);
 var spr_menu_flag = loadSpr("menu_flag", 2, 1);
 var spr_menu_tamatomo_prompt = loadSpr("menu_tamatomo_prompt", 1, 1);
 var spr_menu_tamatomo_podium = loadSpr("menu_tamatomo_podium", 2, 1);
+var spr_menu_minigame_icon = loadSpr("menu_minigame_icon", minigameControl.length, 1);
+var spr_menu_minigame_name = loadSpr("menu_minigame_name", 1, minigameControl.length);
 
 // Board sprites.
 var spr_board_tile = loadSpr("board_tile", 7, 1);
 
 // Player sprites.
+var spr_player_shadow = loadSpr("player_shadow", 1, 1);
+var playerFrames = 5;
 var spr_player = [
-	loadSpr("player_mero", 4, 1),
+	loadSpr("player_mero", playerFrames, 1),
+	loadSpr("player_makiko", playerFrames, 1),
+	loadSpr("player_ane", playerFrames, 1),
+	loadSpr("player_kira", playerFrames, 1),
+	loadSpr("player_chama", playerFrames, 1),
 ];
+
+// Minigame sprites.
+var spr_mini_mommy = loadSpr("mini_mommy", 4, 1);
+var spr_mini_speech = loadSpr("mini_speech", 1, 1);
+var spr_mini_back = loadSpr("mini_back", 1, 1);
+var spr_mini_badminton_back = loadSpr("mini_badminton_back", 1, 1);
+
+// Descriptions.
+var spr_description_eng = [
+	loadSpr("eng_mini_char", 1, 1),
+	loadSpr("eng_mini_select", 1, 1),
+	spr_menu_flag,
+];
+var spr_description_jap = spr_description_eng;

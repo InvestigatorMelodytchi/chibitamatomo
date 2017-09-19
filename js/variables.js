@@ -15,3 +15,6 @@ var menuBackScroll = 0;
 var menuBackTick = 1;
 var gameSpeed = 2;
 var gameSpeedValues = [.25, .5, 1, 2, 4];
+
+// Minigame controllers.
+var minigameControl = [MinigameTest];
