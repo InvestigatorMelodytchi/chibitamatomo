@@ -48,6 +48,13 @@ var spr_player = [
 	loadSpr("player_ane", playerFrames, 1),
 	loadSpr("player_kira", playerFrames, 1),
 	loadSpr("player_chama", playerFrames, 1),
+	loadSpr("player_wata", playerFrames, 1),
+	loadSpr("player_piani", playerFrames, 1),
+	loadSpr("player_gozaru", playerFrames, 1),
+	loadSpr("player_imo", playerFrames, 1),
+	loadSpr("player_uwasa", playerFrames, 1),
+	loadSpr("player_nyoro", playerFrames, 1),
+	loadSpr("player_neo", playerFrames, 1),
 ];
 
 // Minigame sprites.

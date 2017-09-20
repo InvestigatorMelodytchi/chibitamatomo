@@ -1,5 +1,3 @@
-//
-
 // Interval function.
 function gameInterval() {
 	// Drawing.
@@ -20,4 +18,19 @@ function gameInterval() {
 		if (menuBackScroll > -24) menuBackScroll--;
 		else menuBackScroll += 23;
 	}
+}
+
+// Interval drawing function.
+function drawInterval() {
+	// Clearing canvas.
+	env.clear();
+	
+	// Test cursor.
+	//drawSprite(spr_test, mouseState, 0, mouseX, mouseY - 4);
+	
+	// Drawing from controller.
+	objControl.Draw();
+	
+	// Drawing transition.
+	if (objTransition != undefined) objTransition.Draw();
 }

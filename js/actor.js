@@ -123,6 +123,12 @@ function Actor(fSpr, fX, fY) {
 		this.animY = 0;
 	}
 	
+	// Shocked hop.
+	this.Shock = function(fHop) {
+		this.Hop(fHop);
+		this.animOn = 4;
+	}
+	
 	// Gravity.
 	this.Fall = function() {
 		if ((this.animY < 0 || this.animGrav != 0)) {

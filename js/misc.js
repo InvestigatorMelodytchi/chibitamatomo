@@ -14,3 +14,10 @@ function checkForChar(fChar) {
 	}
 	return(false);
 }
+
+// Getting a random unselected character.
+function getUnselectedChar() {
+	tRe = -1;
+	while (tRe == -1 || checkForChar(tRe)) tRe = Math.floor(Math.random() * spr_player.length);
+	return(tRe);
+}

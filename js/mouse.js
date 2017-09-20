@@ -27,5 +27,5 @@ function MouseClick() {
 	mouseState = 2;
 	
 	// Control.
-	if (objTransition == undefined) objControl.Click();
+	if (objTransition == undefined && MousePointNormal(0, 0, 320, 240)) objControl.Click();
 }
