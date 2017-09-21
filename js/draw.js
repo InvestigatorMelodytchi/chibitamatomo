@@ -18,5 +18,5 @@ function drawSprite(fSpr, fCol, fRow, fX, fY) {
 
 // Calling simple drawing with 1x resolution given.
 function drawSpriteNormal(fSpr, fCol, fRow, fX, fY) {
-	drawSprite(fSpr, fCol, fRow, fX * 2, fY * 2);
+	drawSprite(fSpr, fCol, fRow, Math.round(fX) * 2, Math.round(fY) * 2);
 }

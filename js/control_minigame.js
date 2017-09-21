@@ -1,10 +1,26 @@
 // Minigame base controller.
-function ControlMinigame(fMini, fPlay) {
+function ControlMinigame(fMini, fPlay, fFree) {
 	// Variables.
 	this.objMommy = new Mommy(2 + fMini);
 	this.objControl = objControl;
+	this.gameStart = getSec(2);
 	this.gamePlayer = fPlay;
 	this.gameControl = new minigameControl[0](fPlay, this.objMommy);
+	this.gameFree = fFree;
+	this.gameStatus = -1;
+	this.statusY = 0;
+	this.statusGrav = 2.5;
+	
+	// Status falling.
+	this.Fall = function() {
+		if (this.statusY < 79) this.statusGrav += .2;
+		this.statusY += this.statusGrav;
+		if (this.statusY >= 79) {
+			this.statusY = 79;
+			if (this.statusGrav > 1) this.statusGrav *= -.5;
+			else this.statusGrav = 0;
+		}
+	}
 	
 	// Ending minigame.
 	this.End = function(fRew) {
@@ -14,7 +30,11 @@ function ControlMinigame(fMini, fPlay) {
 	
 	// Clicky.
 	this.Click = function() {
-		this.gameControl.Click();
+		// Back (free play).
+		if (this.gameFree && MousePointNormal(0, 4, 83, 30)) this.End(0);
+		
+		// Minigame specific.
+		else this.gameControl.Click();
 	}
 	
 	// Drawing.
@@ -22,10 +42,31 @@ function ControlMinigame(fMini, fPlay) {
 		// Minigame.
 		this.gameControl.Draw();
 		
+		// Falling.
+		this.Fall();
+		
+		// Start.
+		if (this.gameStart > 0) {
+			this.gameStart--;
+			drawSpriteNormal(spr_mini_start, 0, 0, 125, this.statusY);
+		}
+		
+		// Score.
+		else if (this.gameStatus > -1) drawSpriteNormal(spr_mini_score, 0, this.gameStatus, 160 - Math.ceil(spr_mini_score.sprWidth / 4), this.statusY);
+		
+		// Reset.
+		else {
+			this.statusY = -22;
+			this.statusGrav = 0;
+		}
+		
 		// Border.
 		drawSpriteNormal(spr_mini_back, 0, 0, 0, 0);
 		
 		// Mommy.
 		this.objMommy.Draw();
+		
+		// Back button.
+		if (this.gameFree) drawSpriteNormal(spr_menu_button_setup, menuLanguage, 0, -88, 4);
 	}
 }

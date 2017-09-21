@@ -212,7 +212,7 @@ function ControlMiniPickMenu() {
 		else if (this.menuGame > -1) {
 			this.menuLock = true;
 			this.objMommy.mommyFace = 2;
-			TransGo(new ControlMinigame(this.menuGame, 0));
+			TransGo(new ControlMinigame(this.menuGame, 0, true));
 		}
 	}
 	

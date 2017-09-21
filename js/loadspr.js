@@ -61,12 +61,24 @@ var spr_player = [
 var spr_mini_mommy = loadSpr("mini_mommy", 4, 1);
 var spr_mini_speech = loadSpr("mini_speech", 1, 1);
 var spr_mini_back = loadSpr("mini_back", 1, 1);
+var spr_mini_start = loadSpr("mini_start", 1, 1);
+var spr_mini_score = loadSpr("mini_score", 1, 4);
 var spr_mini_badminton_back = loadSpr("mini_badminton_back", 1, 1);
+
+// Minigame sprites: Golf.
+var spr_mini_golf_back = loadSpr("mini_golf_back", 1, 1);
+var spr_mini_golf_ball = loadSpr("mini_golf_ball", 1, 1);
+var spr_mini_golf_shadow = loadSpr("mini_golf_shadow", 1, 1);
+var spr_mini_golf_hole = loadSpr("mini_golf_hole", 2, 1);
+var spr_mini_golf_cursor = loadSpr("mini_golf_cursor", 1, 1);
+var spr_mini_golf_marker = loadSpr("mini_golf_marker", 1, 1);
+var spr_mini_golf_club = loadSpr("mini_golf_club", 3, 1);
+var spr_mini_golf_score = loadSpr("mini_golf_score", 3, 1);
 
 // Descriptions.
 var spr_description_eng = [
 	loadSpr("eng_mini_char", 1, 1),
 	loadSpr("eng_mini_select", 1, 1),
-	spr_menu_flag,
+	loadSpr("eng_mini_golf", 1, 3),
 ];
 var spr_description_jap = spr_description_eng;
