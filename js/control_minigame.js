@@ -10,16 +10,27 @@ function ControlMinigame(fMini, fPlay, fFree) {
 	this.gameStatus = -1;
 	this.statusY = 0;
 	this.statusGrav = 2.5;
+	this.conMusic = this.gameControl.conMusic;
 	
 	// Status falling.
 	this.Fall = function() {
 		if (this.statusY < 79) this.statusGrav += .2;
 		this.statusY += this.statusGrav;
 		if (this.statusY >= 79) {
+			if (this.statusGrav > 0) snd_gen_bounce.Play();
 			this.statusY = 79;
 			if (this.statusGrav > 1) this.statusGrav *= -.5;
 			else this.statusGrav = 0;
 		}
+	}
+	
+	// Initiating grade.
+	this.Grade = function(fIn) {
+		this.gameStatus = fIn;
+		if (fIn == 0) snd_gen_bad.Play();
+		else if (fIn == 1) snd_gen_okay.Play();
+		else if (fIn == 2) snd_gen_good.Play();
+		else if (fIn == 3) snd_gen_great.Play();
 	}
 	
 	// Ending minigame.
@@ -31,7 +42,10 @@ function ControlMinigame(fMini, fPlay, fFree) {
 	// Clicky.
 	this.Click = function() {
 		// Back (free play).
-		if (this.gameFree && MousePointNormal(0, 4, 83, 30)) this.End(0);
+		if (this.gameFree && MousePointNormal(0, 4, 83, 30)) {
+			this.End(0);
+			snd_menu_cancel.Play();
+		}
 		
 		// Minigame specific.
 		else this.gameControl.Click();

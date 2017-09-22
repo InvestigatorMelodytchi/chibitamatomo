@@ -36,6 +36,7 @@ function Actor(fSpr, fX, fY) {
 				if (this.animTick > 0) this.animTick--;
 				else {
 					this.animFrame = 0 + (this.animFrame == 0);
+					if (this.animFrame == 1) snd_gen_happy.Play();
 					this.animTick = 35;
 				}
 				break;
@@ -47,6 +48,8 @@ function Actor(fSpr, fX, fY) {
 					else {
 						this.animFrame = 1;
 						this.animGrav = -(10 / 3);
+						snd_gen_happy.Play();
+						snd_gen_hop.Play();
 					}
 				}
 				else if (this.Fall()) {
@@ -60,6 +63,7 @@ function Actor(fSpr, fX, fY) {
 				if (this.animTick > 0) this.animTick--;
 				else {
 					this.animFrame = 2 + (this.animFrame == 2);
+					if (this.animFrame == 3) snd_gen_sad.Play();
 					this.animTick = 35;
 				}
 				break;
@@ -100,7 +104,7 @@ function Actor(fSpr, fX, fY) {
 	this.Perform = function(fAnim, fTime) {
 		// Reset.
 		this.animOn = fAnim;
-		this.animTick = 0;
+		this.animTick = 15 * (fAnim != 2);
 		this.animX = 0;
 		this.animY = 0;
 		this.animGrav = 0;
@@ -108,7 +112,7 @@ function Actor(fSpr, fX, fY) {
 		
 		// Initial frame.
 		if (fAnim >= 0 && fAnim <= 2) this.animFrame = 0;
-		else if (fAnim == 3) this.animFrame = 3;
+		else if (fAnim == 3) this.animFrame = 2;
 		else if (fAnim >= 4 && fAnim <= 5) this.animFrame = 4;
 		else this.animFrame = 0;
 	}
@@ -121,6 +125,7 @@ function Actor(fSpr, fX, fY) {
 		this.animTick = 0;
 		this.animX = 0;
 		this.animY = 0;
+		snd_gen_hop.Play();
 	}
 	
 	// Shocked hop.

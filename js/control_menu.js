@@ -35,12 +35,15 @@ function ControlMainMenu() {
 	// Reset.
 	resetPlayers();
 	
+	// Music.
+	this.conMusic = msc_menu;
+	
 	// Clicky.
 	this.Click = function() {
-		if (MousePointNormal(0, 120, 171, 146)) TransGo(new ControlSetupMenu());
-		else if (MousePointNormal(0, 150, 171, 176)) TransGo(new ControlViewMenu());
-		else if (MousePointNormal(0, 210, 171, 236)) TransGo(new ControlMiniCharMenu());
-		else if (MousePointNormal(282, 208, 318, 236) && menuLanguageEnable) menuLanguage = !(menuLanguage);
+		if (MousePointNormal(0, 120, 171, 146)) {TransGo(new ControlSetupMenu()); snd_menu_confirm.Play();}
+		else if (MousePointNormal(0, 150, 171, 176)) {TransGo(new ControlViewMenu()); snd_menu_confirm.Play();}
+		else if (MousePointNormal(0, 210, 171, 236)) {TransGo(new ControlMiniCharMenu()); snd_menu_confirm.Play();}
+		else if (MousePointNormal(282, 208, 318, 236) && menuLanguageEnable) {menuLanguage = !(menuLanguage); snd_menu_confirm.Play();}
 	}
 	
 	// Drawing.
@@ -59,6 +62,9 @@ function ControlSetupMenu() {
 	this.menuPlayer = 0;
 	this.menuChar = -1;
 	
+	// Music.
+	this.conMusic = msc_menu;
+	
 	// Clicky.
 	this.Click = function() {
 		// Cancel.
@@ -68,18 +74,21 @@ function ControlSetupMenu() {
 				playerChar[this.menuPlayer] = -1;
 			}
 			else TransGo(new ControlMainMenu());
+			snd_menu_cancel.Play();
 		}
 		
 		// Game speed.
 		else if (MousePointNormal(215, 25, 320, 51)) {
 			if (gameSpeed < 4) gameSpeed++;
 			else gameSpeed = 0;
+			snd_menu_select.Play();
 		}
 		
 		// Selecting.
 		else if (this.menuChar > -1 && this.menuPlayer < 4 && !checkForChar(this.menuChar)) {
 			playerChar[this.menuPlayer] = this.menuChar;
 			this.menuPlayer++;
+			snd_menu_select.Play();
 		}
 	}
 	
@@ -118,9 +127,15 @@ function ControlSetupMenu() {
 
 // View tamatomo menu controller.
 function ControlViewMenu() {
+	// Music.
+	this.conMusic = msc_menu;
+	
 	// Clicky.
 	this.Click = function() {
-		if (MousePointNormal(0, 120, 171, 146)) TransGo(new ControlMainMenu());
+		if (MousePointNormal(0, 120, 171, 146)) {
+			TransGo(new ControlMainMenu());
+			snd_menu_cancel.Play();
+		}
 	}
 	
 	// Drawing.
@@ -147,6 +162,9 @@ function ControlMiniCharMenu() {
 	this.menuChar = -1;
 	this.objMommy = new Mommy(0);
 	
+	// Music.
+	this.conMusic = msc_menu;
+	
 	// Clicky.
 	this.Click = function() {
 		// Cancel.
@@ -154,6 +172,7 @@ function ControlMiniCharMenu() {
 			playerChar[0] = -1;
 			this.objMommy.mommyFace = 0;
 			TransGo(new ControlMainMenu());
+			snd_menu_cancel.Play();
 		}
 		
 		// Selecting.
@@ -161,6 +180,7 @@ function ControlMiniCharMenu() {
 			playerChar[0] = this.menuChar;
 			this.objMommy.mommyFace = 2;
 			TransGo(new ControlMiniPickMenu());
+			snd_menu_confirm.Play();
 		}
 	}
 	
@@ -199,6 +219,9 @@ function ControlMiniPickMenu() {
 	this.menuLock = false;
 	this.objMommy = new Mommy(1);
 	
+	// Music.
+	this.conMusic = msc_menu;
+	
 	// Clicky.
 	this.Click = function() {
 		// Cancel.
@@ -206,6 +229,7 @@ function ControlMiniPickMenu() {
 			playerChar[0] = -1;
 			this.objMommy.mommyFace = 0;
 			TransGo(new ControlMiniCharMenu());
+			snd_menu_cancel.Play();
 		}
 		
 		// Selecting.
@@ -213,6 +237,7 @@ function ControlMiniPickMenu() {
 			this.menuLock = true;
 			this.objMommy.mommyFace = 2;
 			TransGo(new ControlMinigame(this.menuGame, 0, true));
+			snd_menu_confirm.Play();
 		}
 	}
 	

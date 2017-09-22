@@ -60,6 +60,7 @@ function Transition(fNext) {
 	this.x = -(spr_transition.width / 2);
 	this.nextControl = fNext;
 	this.doTick = 0;
+	this.musicQueue = undefined;
 	
 	// Moving.
 	this.Act = function() {
@@ -69,6 +70,7 @@ function Transition(fNext) {
 			this.doTick = 1;
 		}
 		if (this.x == -256) {
+			playMusic(this.nextControl.conMusic);
 			objControl = this.nextControl;
 		}
 		else if (this.x >= 320) {

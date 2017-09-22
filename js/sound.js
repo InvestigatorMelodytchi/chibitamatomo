@@ -12,13 +12,14 @@ function Sound(src) {
 	document.body.appendChild(this.sound);
 	
 	// Playing sound.
-	this.play = function() {
+	this.Play = function() {
 		this.sound.currentTime = 0;
+		this.sound.volume = gameVolume;
 		this.sound.play();
 	}
 	
 	// Stopping sound.
-	this.stop = function() {
+	this.Stop = function() {
 		this.sound.currentTime = 0;
 		this.sound.pause();
 	}
@@ -41,13 +42,14 @@ function Music(src) {
 	}, false);
 	
 	// Playing music.
-	this.play = function() {
+	this.Play = function() {
 		this.sound.currentTime = 0;
+		this.sound.volume = gameVolume;
 		this.sound.play();
 	}
 	
 	// Stopping music.
-	this.stop = function() {
+	this.Stop = function() {
 		this.sound.currentTime = 0;
 		this.sound.pause();
 	}
@@ -55,7 +57,9 @@ function Music(src) {
 
 // Playing new music.
 function playMusic(newMusic) {
-	if (musicCurrentlyPlaying !== undefined) {musicCurrentlyPlaying.stop();}
-	musicCurrentlyPlaying = newMusic;
-	if (musicCurrentlyPlaying !== undefined) {musicCurrentlyPlaying.play();}
+	if (newMusic != musicCurrentlyPlaying) {
+		if (musicCurrentlyPlaying !== undefined) {musicCurrentlyPlaying.Stop();}
+		musicCurrentlyPlaying = newMusic;
+		if (musicCurrentlyPlaying !== undefined) {musicCurrentlyPlaying.Play();}
+	}
 }

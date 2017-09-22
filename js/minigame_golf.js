@@ -21,6 +21,9 @@ function MinigameGolf(fPlay, fMommy) {
 	this.aimMax = 5;
 	this.animSplit = (1/1.5);
 	
+	// Music.
+	this.conMusic = msc_mini_golf;
+	
 	// Running.
 	this.Run = function() {
 		// Aiming.
@@ -45,8 +48,14 @@ function MinigameGolf(fPlay, fMommy) {
 			// Scoring.
 			if (this.gameTick == this.gameWait - 30) {
 				this.gameSheet[this.gameLevel] = (this.gameHole.holeFull);
-				if (this.gameSheet[this.gameLevel]) this.gameActor.Perform(1, this.gameTick);
-				else this.gameActor.Perform(3, this.gameTick);
+				if (this.gameSheet[this.gameLevel]) {
+					this.gameActor.Perform(1, this.gameTick);
+					snd_gen_correct.Play();
+				}
+				else {
+					this.gameActor.Perform(3, this.gameTick);
+					snd_gen_wrong.Play();
+				}
 				this.gameLevel++;
 				if (this.gameBall == undefined) this.gameScore++;
 			}
@@ -78,7 +87,7 @@ function MinigameGolf(fPlay, fMommy) {
 						this.gameActor.Perform(3, undefined);
 						this.objMommy.mommyFace = 3;
 					}
-					objControl.gameStatus = ((this.gameScore >= 1) + (this.gameScore >= 3) + (this.gameScore == 5));
+					objControl.Grade((this.gameScore >= 1) + (this.gameScore >= 3) + (this.gameScore == 5));
 					this.gameTick = getSec(3);
 					this.gameFinish = true;
 				}
@@ -103,6 +112,7 @@ function MinigameGolf(fPlay, fMommy) {
 					this.gameDone = true;
 					this.gameBall = undefined;
 					this.gameHole.holeFull = true;
+					snd_mini_golf_sink.Play();
 				}
 			}
 			
@@ -123,6 +133,7 @@ function MinigameGolf(fPlay, fMommy) {
 		if (this.gameBall != undefined) {
 			if (!this.gameBall.ballHit && this.gameBall.Grounded()) {
 				if (MousePointNormal(156, 98, 221, 120)) {
+					snd_mini_golf_hit.Play();
 					this.clubFrame = 1;
 					this.clubTick = 4;
 					this.gameBall.Hit(calcDistance(this.gameBall.x, this.gameBall.y, mouseX / 2, mouseY / 2), calcDirection(this.gameBall.x, this.gameBall.y, mouseX / 2, mouseY / 2), this.clubPower);
@@ -189,6 +200,7 @@ function MiniGolfBall() {
 	this.Skip = function() {
 		this.ballGrav = -Math.sqrt(this.ballSpeed * 2);
 		this.ballSpeed *= (1/3);
+		snd_mini_golf_cup.Play();
 	}
 	
 	// Sinking.
@@ -196,6 +208,7 @@ function MiniGolfBall() {
 		this.ballGrav = -Math.max(Math.sqrt(this.ballSpeed * 2.5), .5);
 		this.ballDir = calcDirection(this.x, this.y, fX, fY);
 		this.ballSpeed = calcDistance(this.x, this.y, fX, fY) / ((Math.abs(this.ballGrav) * 2) / .1);
+		snd_mini_golf_cup.Play();
 	}
 	
 	// Hitting.
@@ -231,6 +244,7 @@ function MiniGolfBall() {
 			this.loft += this.ballGrav;
 			this.ballGrav += .1;
 			if (this.loft >= 0) {
+				snd_mini_golf_bounce.Play();
 				this.loft = 0;
 				if (this.ballGrav >= 3 && !this.inRough()) {
 					this.ballGrav = -(this.ballGrav * (1/5));
