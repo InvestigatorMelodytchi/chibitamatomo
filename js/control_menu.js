@@ -168,7 +168,7 @@ function ControlMiniCharMenu() {
 	// Clicky.
 	this.Click = function() {
 		// Cancel.
-		if (MousePointNormal(0, 8, 171, 34)) {
+		if (MousePointNormal(0, 8, 171, 34) && !gameDemoMode) {
 			playerChar[0] = -1;
 			this.objMommy.mommyFace = 0;
 			TransGo(new ControlMainMenu());
@@ -187,7 +187,8 @@ function ControlMiniCharMenu() {
 	// Drawing.
 	this.Draw = function() {
 		// Menu.
-		MenuDrawMini();
+		if (gameDemoMode) drawSpriteNormal(spr_menu_back, 0, 0, menuBackScroll, menuBackScroll);
+		else MenuDrawMini();
 		
 		// Characters.
 		this.menuBlink = !(this.menuBlink);

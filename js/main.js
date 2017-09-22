@@ -1,7 +1,8 @@
 // Actually starting the game.
 function startGame() {
 	env.start();
-	objControl = new ControlMainMenu();
+	if (gameDemoMode) objControl = new ControlMiniCharMenu();
+	else objControl = new ControlMainMenu();
 }
 
 // Initializing canvas.

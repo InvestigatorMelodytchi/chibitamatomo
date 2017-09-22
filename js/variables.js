@@ -16,6 +16,7 @@ var menuBackTick = 1;
 var gameSpeed = 2;
 var gameSpeedValues = [.25, .5, 1, 2, 4];
 var gameVolume = .1;
+var gameDemoMode = true;
 
 // Minigame controllers.
 var minigameControl = [MinigameGolf];
